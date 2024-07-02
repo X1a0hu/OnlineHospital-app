@@ -30,7 +30,7 @@
               <th>检查意义</th>
               <th>检查要求</th>
             </tr>
-            <tr v-for="checkItem in smItem.checkItemList">
+            <tr v-for="checkItem in smItem.checkitemList">
               <td>{{ checkItem.ciName }}</td>
               <td>{{ checkItem.ciContent }}</td>
               <td>{{ checkItem.meaning }}</td>
@@ -68,7 +68,7 @@ export default {
       this.setmeals.sort();  //刷新页面数组的值
     },
     loadSetMealList() {
-      let url = "/setmeal/getAll";
+      let url = "/setMeal/getAll";
       this.$axios({
         method: 'get',
         url: url,
@@ -76,10 +76,11 @@ export default {
           Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('token'))
         }
       }).then(response => {
-        console.log("success")
+        console.log("执行到这里了")
+        console.log(response.data.data)
         this.setmeals = response.data.data
         this.setmeals.forEach(sm => {
-          sm.show = false;
+          sm.show = true;
         })
       }).catch(e => {
         console.log(e);
