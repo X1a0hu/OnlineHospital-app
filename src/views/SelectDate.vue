@@ -2,7 +2,7 @@
   <!-- 总容器 -->
   <div class="wrapper">
     <header>
-      <i class="fa fa-angle-left" @click="toBack"></i>
+      <i class="fa fa-angle-left" @click="toBack()"></i>
       <p>选择体检日期</p>
       <div></div>
     </header>
@@ -10,9 +10,11 @@
 
     <section>
       <div class="date-box">
-        <i class="fa fa-angle-left" @click="preMonth"></i>
-        <p>2024年7月</p>
-        <i class="fa fa-angle-right" @click="nextMonth"></i>
+        <i class="fa fa-angle-left" @click="preMonth()"></i>
+        <p>
+          {{ checkAvailability.year + "年" + checkAvailability.month + "月" }}
+        </p>
+        <i class="fa fa-angle-right" @click="nextMonth()"></i>
       </div>
       <table>
         <tr>
@@ -27,15 +29,21 @@
       </table>
       <ul>
         <li v-for="(c, index) in checkAvailability.days" :key="index">
-          <p>
+          <p
+            :class="{
+              fontColor: c.reserve == true && c.remainSlots != 0,
+              pselect: c.selectDay == 1,
+            }"
+            @click="selectDay(index)"
+          >
             {{ c.date != null ? new Date(c.date).getDate() : "" }}
           </p>
           <p class="count">
             {{
               index % 7 == 0 && c.date != null
                 ? ""
-                : c.open == true && c.remainingSlots != 0
-                ? "余" + c.remainingSlots
+                : c.reserve == true && c.remainSlots != 0
+                ? "余" + c.remainSlots
                 : "0"
             }}
           </p>
@@ -66,7 +74,7 @@ export default {
         year: null,
         month: null,
         days: [],
-        selectDay: "",
+        selectDay: "", //日历中选中的日期
       },
     };
   },
@@ -75,6 +83,18 @@ export default {
     this.loadOrdersData();
   },
   methods: {
+    selectDay(index) {
+      if (this.checkAvailability.days[index].reserve == false) {
+        return;
+      }
+      for (let i = 0; i < this.checkAvailability.days.length; i++) {
+        this.checkAvailability.days[i].selectDay = 0; //清除日历中每天选中状态 全部清零
+      }
+      this.checkAvailability.days[index].selectDay = 1;
+      this.checkAvailability.selectDay =
+        this.checkAvailability.days[index].date;
+      this.checkAvailability.days.sort();
+    },
     toBack() {
       this.$router.back();
     },
