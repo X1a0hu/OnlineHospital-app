@@ -9,12 +9,21 @@
     <section>
       <div class="input-box">
         <i class="fa fa-user-o" aria-hidden="true"></i>
-        <input type="text" v-model="user.userID" placeholder="输入手机号" style="position: relative; left: 1.5vw;"/>
+        <input
+          type="text"
+          v-model="user.userID"
+          placeholder="输入手机号"
+          style="position: relative; left: 1.5vw"
+        />
       </div>
       <div class="input-box">
         <i class="fa fa-lock" aria-hidden="true"></i>
-        <input type="password" v-model="user.password" placeholder="输入登录密码"
-               style="position: relative; left: 15px;"/>
+        <input
+          type="password"
+          v-model="user.password"
+          placeholder="输入登录密码"
+          style="position: relative; left: 15px"
+        />
       </div>
       <div class="reg-box">
         <p @click="toRegister">注册</p>
@@ -37,71 +46,69 @@
 export default {
   data() {
     return {
-      title: 'shou体检预约-登录',//title数据是可以从服务器请求获得
+      title: "shou体检预约-登录", //title数据是可以从服务器请求获得
       user: {
-        userID: '',
-        password: '',
+        userID: "",
+        password: "",
       },
-    }
+    };
   },
   methods: {
     toHome() {
-      this.$router.push({path: '/'}).catch(e => {
-      });
+      this.$router.push({ path: "/" }).catch((e) => {});
     },
     toUpdate() {
-      this.$router.push({path: 'updatepwd'}).catch(e => {
-
-      });
+      this.$router.push({ path: "updatepwd" }).catch((e) => {});
     },
     login() {
-      if (this.user.userID == '') {
+      if (this.user.userID == "") {
         this.$message({
-          showClose: true,//是否显示关闭按钮
-          message: '用户id不能为空',
-          type: 'warning',//类型
+          showClose: true, //是否显示关闭按钮
+          message: "用户id不能为空",
+          type: "warning", //类型
           onClose: () => {
-            console.log('关闭');
-          }
+            console.log("关闭");
+          },
         });
         return;
       }
-      if (this.user.password == '') {
+      if (this.user.password == "") {
         this.$message({
-          showClose: true,//是否显示关闭按钮
-          message: '用户密码不能为空',
-          type: 'warning',//类型
+          showClose: true, //是否显示关闭按钮
+          message: "用户密码不能为空",
+          type: "warning", //类型
           onClose: () => {
-            console.log('关闭');
-          }
+            console.log("关闭");
+          },
         });
         return;
       }
       //TODO:登录接口
-      let url = 'user/login';
-      this.$axios.post(url, this.user).then(response => {
-        //登录成功，将登录用户名存储到sessionStorage中
-        sessionStorage.setItem('token', JSON.stringify(response.data.data))
-        this.$message({
-          showClose: true,//是否显示关闭按钮
-          message: '登录操作成功',
-          type: 'success',//类型
-          onClose: () => {
-            this.$router.push({path: '/'}).catch(e => {
-            });
-          },
+      let url = "user/login";
+      this.$axios
+        .post(url, this.user)
+        .then((response) => {
+          //登录成功，将登录用户名存储到sessionStorage中
+          sessionStorage.setItem("token", JSON.stringify(response.data.data));
+          this.$message({
+            showClose: false, //是否显示关闭按钮
+            message: "登录操作成功",
+            duration: 1000,
+            type: "success", //类型
+            onClose: () => {
+              this.$router.push({ path: "/" }).catch((e) => {});
+            },
+          });
         })
-      }).catch(e => {
-
-        console.log(e);
-      })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     toRegister() {
-      this.$router.push({path: '/register'}).catch(e => {
-      })
-    }
-  }
-}
+      this.$router.push({ path: "/register" }).catch((e) => {});
+    },
+  },
+};
 </script>
 
 <style src="@/assets/css/Login.css" scoped></style>

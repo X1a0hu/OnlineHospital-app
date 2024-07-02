@@ -10,9 +10,9 @@
     <div class="top-ban"></div>
 
     <ul class="setmeal">
-      <li v-for="(smItem,index) in setmeals" :key="smItem.smId">
+      <li v-for="(smItem, index) in setmeals" :key="smItem.smID">
         <div class="item">
-          <div class="item-left">
+          <div class="item-left" @click="selectDate(smItem.smID)">
             <h3>{{ smItem.name }}</h3>
             <p>{{ smItem.price }}</p>
           </div>
@@ -47,53 +47,63 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
+import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
     return {
+      //医院的编号，从上一个组件路由跳转过来，使用路由传参，这里需要从路由中获取参数
+      hpID: this.$route.query.hpID,
       //套餐和检查明细数组
       setmeals: [],
-    }
+    };
   },
-  created() { //Vue组件创建完毕钩子函数，在这里请求服务器数据。
+  created() {
+    //Vue组件创建完毕钩子函数，在这里请求服务器数据。
     this.loadSetMealList();
   },
   methods: {
     toBack() {
-      this.$router.back()
+      this.$router.back();
     },
-    setBool(index) {  //index就是点击 套餐下标
+    setBool(index) {
+      //index就是点击 套餐下标
       this.setmeals[index].show = !this.setmeals[index].show;
-      this.setmeals.sort();  //刷新页面数组的值
+      this.setmeals.sort(); //刷新页面数组的值
+    },
+    selectDate(smID) {
+      this.$router.push({
+        path: "/selectDate",
+        query: { smID: smID, hpID: this.hpID },
+      });
     },
     loadSetMealList() {
       let url = "/setMeal/getAll";
       this.$axios({
-        method: 'get',
+        method: "get",
         url: url,
         headers: {
-          Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('token'))
-        }
-      }).then(response => {
-        console.log("执行到这里了")
-        console.log(response.data.data)
-        this.setmeals = response.data.data
-        this.setmeals.forEach(sm => {
-          sm.show = true;
-        })
-      }).catch(e => {
-        console.log(e);
+          Authorization:
+            "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+        },
       })
-    }
+        .then((response) => {
+          this.setmeals = response.data.data;
+          this.setmeals.forEach((sm) => {
+            sm.show = true;
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
   components: {
-//注册子组件   使用名字:导入名字
+    //注册子组件   使用名字:导入名字
     Footer,
   },
-}
+};
 </script>
 
 <style src="@/assets/css/SetMeal.css" scoped></style>
-<style scoped>
-</style>
+<style scoped></style>

@@ -9,13 +9,17 @@
     <div class="top-ban"></div>
 
     <ul class="hospital">
-      <li v-for="(item,index) in hospitalList" :key="item.hpId">
+      <li v-for="(item, index) in hospitalList" :key="item.hpID">
         <h3>
           {{ item.name }}
-          <i class="fa fa-angle-right" aria-hidden="true" @click="toSetMeal"></i>
+          <i
+            class="fa fa-angle-right"
+            aria-hidden="true"
+            @click="toSetMeal(item.hpID)"
+          ></i>
         </h3>
         <div class="hospital-info">
-          <img :src="item.picture" alt="Hospital Image">
+          <img :src="item.picture" alt="Hospital Image" />
           <table>
             <tr>
               <td>营业时间:</td>
@@ -54,49 +58,53 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
-import {head} from "axios";
+import Footer from "@/components/Footer.vue";
 
 export default {
   data() {
     return {
       hospitalList: [],
-    }
+    };
   },
   created() {
     this.loadHospitalList();
   },
   methods: {
-    toSetMeal() {
-      this.$router.push({path: '/setMeal'}).catch(e => {
-      })
+    toSetMeal(hpID) {
+      this.$router
+        .push({
+          path: "/setMeal",
+          query: { hpID: hpID },
+        })
+        .catch((e) => {});
     },
     toBack() {
       this.$router.back();
     },
     loadHospitalList() {
-      let url = '/hospital/getAll';
+      let url = "/hospital/getAll";
       this.$axios({
-        method: 'get',
+        method: "get",
         url: url,
-        headers:{
-          Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('token'))
-        }
-      }).then(response => {
-        this.hospitalList = response.data.data;
-      }).catch(e => {
-        console.log(e)
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+        },
       })
-    }
+        .then((response) => {
+          this.hospitalList = response.data.data;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
   components: {
     //注册子组件   使用名字:导入名字
     Footer,
   },
-
-}
+};
 </script>
 
 <style src="@/assets/css/Hospital.css" scoped></style>
-<style scoped>
-</style>
+<style scoped></style>
