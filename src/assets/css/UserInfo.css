@@ -40,24 +40,6 @@
 .phone {
   font-size: 14px;
 }
-.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.menu li {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
-  cursor: pointer;
-}
-.menu li i {
-  margin-right: 10px;
-}
-.menu li .arrow {
-  margin-left: auto;
-}
 .bottom-nav {
   display: flex;
   justify-content: space-around;
@@ -71,24 +53,18 @@
   font-size: 14px;
   cursor: pointer;
 }
+.menu {
+  list-style-type: none;
+  padding: 0;
+  text-align: center; /* 让文本居中 */
+}
+
 .menu li {
-  display: flex;
-  justify-content: space-between; /* 将内容和图标分隔到两侧 */
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
-  cursor: pointer;
+  margin-bottom: 20px; /* 调整每个菜单项之间的垂直间距 */
 }
 
-.menu li i:first-child {
-  margin-right: 10px; /* 图标与文本之间的间距 */
-}
-
-.menu-label {
-  flex-grow: 1; /* 使文本部分占据中间的空间 */
-  text-align: center; /* 文本居中 */
-}
-
-.el-icon-right {
-  font-size: 16px;
+.menu span {
+  display: block; /* 让每个菜单项的文本竖向排列 */
+  padding: 10px; /* 添加内边距增加文本周围的空间 */
+  cursor: pointer; /* 将鼠标悬停效果应用于菜单项 */
 }
