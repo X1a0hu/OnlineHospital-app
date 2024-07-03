@@ -53,7 +53,17 @@
         </li>
       </ul>
     </section>
-    <div class="bottom-btn">
+    <div
+      class="bottom-btn"
+      @click="
+        submit(
+          checkAvailability.hpID,
+          checkAvailability.smID,
+          checkAvailability.selectDay
+        )
+      "
+    >
+      <!-- -->
       <div></div>
       <div>下一步</div>
     </div>
@@ -83,6 +93,21 @@ export default {
     this.loadOrdersData();
   },
   methods: {
+    submit(hpID, smID, selectDay) {
+      this.$router
+        .push({
+          path: "/confirmOrder",
+          query: {
+            selectDay: selectDay,
+            hpID: hpID,
+            smID: smID,
+          },
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log("抛出异常了");
+        });
+    },
     selectDay(index) {
       if (this.checkAvailability.days[index].reserve == false) {
         return;

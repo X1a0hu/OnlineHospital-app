@@ -212,7 +212,19 @@ export default {
       this.$router.push({ path: "/consulting" }).catch((e) => {});
     },
     HospitalList() {
-      this.$router.push({ path: "/hospital" }).catch((e) => {});
+      if (!this.isLogin) {
+        this.$message({
+          showClose: false, //是否显示关闭按钮
+          message: "您还没有进行登录！请先登录！",
+          duration: 1000,
+          type: "warning", //类型
+          onClose: () => {
+            console.log("关闭");
+          },
+        });
+      } else {
+        this.$router.push({ path: "/hospital" }).catch((e) => {});
+      }
     },
   },
   components: {

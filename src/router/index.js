@@ -67,6 +67,11 @@ const routes = [
     name: "backStage",
     component: () => import("@/views/BackStage.vue"),
   },
+  {
+    path: "/confirmOrder",
+    name: "confirmOrder",
+    component: () => import("@/views/ConfirmOrder.vue"),
+  },
 ];
 //创建路由对象，需要将上面配置的路由信息(数组)
 const router = new VueRouter({
