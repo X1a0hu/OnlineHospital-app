@@ -90,6 +90,8 @@ export default {
         .then((response) => {
           //登录成功，将登录用户名存储到sessionStorage中
           sessionStorage.setItem("token", JSON.stringify(response.data.data));
+
+          this.getUserInfo();
           this.$message({
             showClose: false, //是否显示关闭按钮
             message: "登录操作成功",
@@ -106,6 +108,33 @@ export default {
     },
     toRegister() {
       this.$router.push({ path: "/register" }).catch((e) => {});
+    },
+    getUserInfo() {
+      let url = "/user/getByUserID";
+      this.$axios({
+        method: "post",
+        url: url,
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+        },
+        params: {
+          userID: this.user.userID,
+        },
+      })
+        .then((response) => {
+          sessionStorage.setItem("realName", response.data.data.realName);
+          sessionStorage.setItem("birthday", response.data.data.birthday);
+          sessionStorage.setItem(
+            "identityCard",
+            response.data.data.identityCard
+          );
+          sessionStorage.setItem("userId", this.user.userID);
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log("出现错误了！");
+        });
     },
   },
 };

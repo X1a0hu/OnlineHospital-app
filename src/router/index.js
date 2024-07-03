@@ -72,6 +72,11 @@ const routes = [
     name: "confirmOrder",
     component: () => import("@/views/ConfirmOrder.vue"),
   },
+  {
+    path: "/pay",
+    name: "pay",
+    component: () => import("@/views/Pay.vue"),
+  },
 ];
 //创建路由对象，需要将上面配置的路由信息(数组)
 const router = new VueRouter({

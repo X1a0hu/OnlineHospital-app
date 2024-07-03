@@ -39,7 +39,7 @@
         </tr>
       </table>
       <div class="title">
-        <p>体检机构</p>
+        <p>体检机构：</p>
         {{ this.hospital.name }}
       </div>
       <table>
@@ -68,7 +68,8 @@
       </div>
       <table>
         <tr>
-          <td>XXXXXX</td>
+          <td v-if="smID == 1">男士套餐</td>
+          <td v-else="smID == 0">女士套餐</td>
         </tr>
       </table>
     </section>
@@ -76,8 +77,10 @@
     <div ref="alipayForm"></div>
 
     <div class="bottom-btn">
-      <div class="first">实付款: <span>￥0.00</span></div>
-      <div class="last">确认支付</div>
+      <div class="first">
+        实付款: <span>{{ this.price }}元</span>
+      </div>
+      <div class="last" @click="pay()">确认支付</div>
     </div>
 
     <div class="bottom-ban"></div>
@@ -89,6 +92,7 @@ import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
+      usertest: {},
       user: {
         realName: "",
         identityCard: "",
@@ -108,10 +112,13 @@ export default {
       year: this.$route.query.year,
       month: this.$route.query.month,
       selectDay: this.$route.query.selectDay,
+      price: "",
     };
   },
-  ctreated() {
-    loadHospitalInfo();
+  created() {
+    this.loadHospitalInfo();
+    this.getSetMealPrice();
+    this.getUserInfo();
   },
   methods: {
     toBack() {
@@ -141,11 +148,48 @@ export default {
           this.hospital.deadline = response.data.data.deadline;
           this.hospital.telephone = response.data.data.telephone;
           this.hospital.address = response.data.data.address;
-          console.log("运行到了！");
         })
         .catch((e) => {
           console.log(e);
         });
+    },
+    getSetMealPrice() {
+      let url = "/setMeal/getBySetMealID";
+      this.$axios({
+        method: "get",
+        url: url,
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+        },
+        params: {
+          smID: this.smID,
+        },
+      })
+        .then((response) => {
+          this.price = response.data.data.price;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    getUserInfo() {
+      this.user.userID = sessionStorage.getItem("userId");
+      this.user.realName = sessionStorage.getItem("realName");
+      this.user.birthday = sessionStorage.getItem("birthday");
+      this.user.identityCard = sessionStorage.getItem("identityCard");
+      console.log(this.user.userID);
+      console.log(this.user.realName);
+      console.log(this.user.birthday);
+      console.log(this.user.identityCard);
+      this.user.realName = this.user.realName.replace(/^\"|\"$/g, "");
+      this.user.birthday = this.user.birthday.replace(/^\"|\"$/g, "");
+      this.user.identityCard = this.user.identityCard.replace(/^\"|\"$/g, "");
+    },
+    pay() {
+      this.$router.push({ path: "/pay" }).catch((e) => {
+        console.log(e);
+      });
     },
   },
   components: {
