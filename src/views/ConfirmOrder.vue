@@ -178,10 +178,7 @@ export default {
       this.user.realName = sessionStorage.getItem("realName");
       this.user.birthday = sessionStorage.getItem("birthday");
       this.user.identityCard = sessionStorage.getItem("identityCard");
-      console.log(this.user.userID);
-      console.log(this.user.realName);
-      console.log(this.user.birthday);
-      console.log(this.user.identityCard);
+      //去除双引号
       this.user.realName = this.user.realName.replace(/^\"|\"$/g, "");
       this.user.birthday = this.user.birthday.replace(/^\"|\"$/g, "");
       this.user.identityCard = this.user.identityCard.replace(/^\"|\"$/g, "");

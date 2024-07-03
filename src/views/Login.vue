@@ -11,7 +11,7 @@
         <i class="fa fa-user-o" aria-hidden="true"></i>
         <input
           type="text"
-          v-model="user.userID"
+          v-model="user.username"
           placeholder="输入手机号"
           style="position: relative; left: 1.5vw"
         />
@@ -48,7 +48,7 @@ export default {
     return {
       title: "shou体检预约-登录", //title数据是可以从服务器请求获得
       user: {
-        userID: "",
+        username: "",
         password: "",
       },
     };
@@ -61,7 +61,7 @@ export default {
       this.$router.push({ path: "updatepwd" }).catch((e) => {});
     },
     login() {
-      if (this.user.userID == "") {
+      if (this.user.username == "") {
         this.$message({
           showClose: true, //是否显示关闭按钮
           message: "用户id不能为空",
@@ -90,7 +90,6 @@ export default {
         .then((response) => {
           //登录成功，将登录用户名存储到sessionStorage中
           sessionStorage.setItem("token", JSON.stringify(response.data.data));
-
           this.getUserInfo();
           this.$message({
             showClose: false, //是否显示关闭按钮
@@ -103,6 +102,7 @@ export default {
           });
         })
         .catch((e) => {
+          console.log("出现错误了！");
           console.log(e);
         });
     },
@@ -119,7 +119,7 @@ export default {
             "Bearer " + JSON.parse(sessionStorage.getItem("token")),
         },
         params: {
-          userID: this.user.userID,
+          username: this.user.username,
         },
       })
         .then((response) => {
@@ -129,7 +129,7 @@ export default {
             "identityCard",
             response.data.data.identityCard
           );
-          sessionStorage.setItem("userId", this.user.userID);
+          sessionStorage.setItem("username", this.user.username);
         })
         .catch((e) => {
           console.log(e);

@@ -63,11 +63,6 @@ const routes = [
     component: () => import("@/views/SelectDate.vue"),
   },
   {
-    path: "/backStage",
-    name: "backStage",
-    component: () => import("@/views/BackStage.vue"),
-  },
-  {
     path: "/confirmOrder",
     name: "confirmOrder",
     component: () => import("@/views/ConfirmOrder.vue"),
@@ -76,6 +71,21 @@ const routes = [
     path: "/pay",
     name: "pay",
     component: () => import("@/views/Pay.vue"),
+  },
+  {
+    path: "/reportManageSystem",
+    name: "reportManageSystem",
+    component: () => import("@/views/ReportManageSystem.vue"),
+  },
+  {
+    path: "/editReport",
+    name: "editReport",
+    component: () => import("@/views/EditReport.vue"),
+  },
+  {
+    path: "/report",
+    name: "report",
+    component: () => import("@/views/Report.vue"),
   },
 ];
 //创建路由对象，需要将上面配置的路由信息(数组)

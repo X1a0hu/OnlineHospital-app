@@ -34,7 +34,7 @@
               <td>{{ checkItem.ciName }}</td>
               <td>{{ checkItem.ciContent }}</td>
               <td>{{ checkItem.meaning }}</td>
-              <td>{{ checkItem.remarks }}</td>
+              <td>{{ checkItem.remark }}</td>
             </tr>
           </table>
         </div>

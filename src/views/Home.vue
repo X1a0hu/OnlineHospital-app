@@ -10,7 +10,7 @@
         </div>
         <!-- <i class="fa fa-envelope-o" aria-hidden="true"></i> -->
         <i
-          class="fa fa-database fa-2x"
+          class="fa fa-database fa-x"
           aria-hidden="true"
           @click="toBackStage"
         ></i>
@@ -77,8 +77,8 @@
       </div>
       <div class="report-content">
         <p>随时随地查看体检报告</p>
-        <div v-if="isLogin">立即查看</div>
-        <div v-else @click="toLogin">立即登录</div>
+        <div v-if="isLogin" @click="toReport()">立即查看</div>
+        <div v-else @click="toLogin()">立即登录</div>
       </div>
     </div>
 
@@ -202,7 +202,7 @@ export default {
   },
   methods: {
     toBackStage() {
-      this.$router.push({ path: "/backstage" }).catch((e) => {});
+      this.$router.push({ path: "/reportManageSystem" }).catch((e) => {});
     },
     //组件界面使用所有的方法
     toLogin() {
@@ -210,6 +210,9 @@ export default {
     },
     toConsulting() {
       this.$router.push({ path: "/consulting" }).catch((e) => {});
+    },
+    toReport() {
+      this.$router.push({ path: "/report" }).catch((e) => {});
     },
     HospitalList() {
       if (!this.isLogin) {
