@@ -1,70 +1,105 @@
-.profile-page {
+/* Global font family */
+body {
   font-family: Arial, sans-serif;
 }
+
+/* Header styling */
 .header {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   background-color: #f0f0f0;
 }
+
 .back-button {
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
+
 .title {
   flex-grow: 1;
   text-align: center;
   margin: 0;
+  font-size: 24px;
 }
+
+/* Profile info section */
 .profile-info {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
   background: linear-gradient(to right, #5ddcff, #3e73ff);
   color: white;
 }
+
 .avatar img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
+
 .user-details {
-  margin-left: 10px;
+  margin-left: 20px;
 }
+
 .username {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
 }
+
 .phone {
-  font-size: 14px;
+  font-size: 18px;
 }
+
+/* Menu items */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+
+.menu li:hover {
+  background-color: #f0f0f0; /* 鼠标悬停时背景色 */
+}
+
+.menu li i:first-child {
+  margin-right: 15px;
+}
+
+.menu-label {
+  flex-grow: 1;
+  text-align: left;
+  font-size: 20px;
+}
+
+/* Bottom navigation */
 .bottom-nav {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
+  padding: 15px;
   border-top: 1px solid #e0e0e0;
 }
+
 .bottom-nav button {
   background: none;
   border: none;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
 }
-.menu {
-  list-style-type: none;
-  padding: 0;
-  text-align: center; /* 让文本居中 */
-}
 
-.menu li {
-  margin-bottom: 20px; /* 调整每个菜单项之间的垂直间距 */
-}
-
-.menu span {
-  display: block; /* 让每个菜单项的文本竖向排列 */
-  padding: 10px; /* 添加内边距增加文本周围的空间 */
-  cursor: pointer; /* 将鼠标悬停效果应用于菜单项 */
+.el-icon-right {
+  font-size: 20px;
 }

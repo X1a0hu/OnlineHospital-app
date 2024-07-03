@@ -21,7 +21,7 @@
       <li><span>我的医生</span></li>
       <li><span>问诊订单</span></li>
       <li><span>商城订单</span></li>
-      <li><span>修改密码</span></li>
+      <li><span @click="toUpdatePWD()">修改密码</span></li>
       <li><span @click="logout()">退出登录</span></li>
     </ul>
 
@@ -41,6 +41,9 @@ export default {
   },
   methods: {
     //TODO:修改密码
+    toUpdatePWD() {
+      this.$router.push({ path: "/updatepwd" });
+    },
     toBack() {
       this.$router.back();
     },

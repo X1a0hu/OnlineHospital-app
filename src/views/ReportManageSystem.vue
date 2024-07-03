@@ -1,5 +1,6 @@
 <template>
   <div class="Wrapper">
+    <i class="fa fa-angle-left fa-2x" @click="toHome()"></i>
     <hb :doctor-name="doctorrealName" />
     <div class="health-check-report">
       <el-col :span="6" class="sidebar">
@@ -155,6 +156,9 @@ export default {
     };
   },
   methods: {
+    toHome() {
+      this.$router.back();
+    },
     onSearch() {
       console.log("查询条件:", this.form);
       this.fetchData();
@@ -191,6 +195,17 @@ export default {
           this.page = response.data.data.current;
         })
         .catch((e) => {
+          if (sessionStorage.getItem("token") == null) {
+            this.$message({
+              showClose: false, //是否显示关闭按钮
+              message: "请先登录！",
+              duration: 1000,
+              type: "error", //类型
+              onClose: () => {
+                console.log("关闭");
+              },
+            });
+          }
           console.log(e);
         });
 
