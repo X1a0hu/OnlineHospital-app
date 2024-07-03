@@ -71,3 +71,24 @@
   font-size: 14px;
   cursor: pointer;
 }
+.menu li {
+  display: flex;
+  justify-content: space-between; /* 将内容和图标分隔到两侧 */
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.menu li i:first-child {
+  margin-right: 10px; /* 图标与文本之间的间距 */
+}
+
+.menu-label {
+  flex-grow: 1; /* 使文本部分占据中间的空间 */
+  text-align: center; /* 文本居中 */
+}
+
+.el-icon-right {
+  font-size: 16px;
+}

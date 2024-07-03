@@ -112,6 +112,7 @@ export default {
       month: this.$route.query.month,
       selectDay: this.$route.query.selectDay,
       price: "",
+      state: "",
     };
   },
   created() {
@@ -152,6 +153,7 @@ export default {
           console.log(e);
         });
     },
+    //获取套餐价格
     getSetMealPrice() {
       let url = "/setMeal/getBySetMealID";
       this.$axios({
@@ -172,6 +174,7 @@ export default {
           console.log(e);
         });
     },
+    //获取用户信息
     getUserInfo() {
       this.user.userID = sessionStorage.getItem("userID");
       this.user.realName = sessionStorage.getItem("realName");
@@ -182,6 +185,7 @@ export default {
       this.user.birthday = this.user.birthday.replace(/^\"|\"$/g, "");
       this.user.identityCard = this.user.identityCard.replace(/^\"|\"$/g, "");
     },
+    //确认支付
     pay() {
       let url = "/user/submitReserve";
       this.$axios({
@@ -191,16 +195,19 @@ export default {
           Authorization:
             "Bearer " + JSON.parse(sessionStorage.getItem("token")),
         },
-        params: {
+        data: {
           orderDate: this.selectDay,
           userID: this.user.userID,
           hpID: this.hpID,
           smID: this.smID,
-          state: "1",
+          state: 1,
         },
       })
-        .then((respnose) => {
-          if (respnose.data.code == 200) {
+        .then((response) => {
+          if (response.data.code == 200) {
+            this.$router.push({ path: "/pay" }).catch((e) => {
+              console.log(e);
+            });
             this.$message({
               showClose: false, //是否显示关闭按钮
               message: "订单已提交！",
@@ -216,9 +223,6 @@ export default {
           console.log(this.smID);
           console.log(e);
         });
-      // this.$router.push({ path: "/pay" }).catch((e) => {
-      //   console.log(e);
-      // });
     },
   },
   components: {

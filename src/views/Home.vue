@@ -213,7 +213,7 @@ export default {
       this.$router.push({ path: "/consulting" }).catch((e) => {});
     },
     toReport() {
-      this.$router.push({ path: "/report" }).catch((e) => {});
+      this.$router.push({ path: "/checkReport" }).catch((e) => {});
     },
     HospitalList() {
       if (!this.isLogin) {
