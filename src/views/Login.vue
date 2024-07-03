@@ -26,10 +26,10 @@
         />
       </div>
       <div class="reg-box">
-        <p @click="toRegister">注册</p>
-        <p @click="toUpdate">忘记密码？</p>
+        <p @click="toRegister()">注册</p>
+        <p @click="toUpdate()">忘记密码？</p>
       </div>
-      <div class="button-box" @click="login">登录</div>
+      <div class="button-box" @click="login()">登录</div>
     </section>
     <footer>
       <div>
@@ -61,6 +61,7 @@ export default {
       this.$router.push({ path: "updatepwd" }).catch((e) => {});
     },
     login() {
+      //字段检测用户名不为空
       if (this.user.username == "") {
         this.$message({
           showClose: true, //是否显示关闭按钮
@@ -72,6 +73,7 @@ export default {
         });
         return;
       }
+      //字段检测密码不为空
       if (this.user.password == "") {
         this.$message({
           showClose: true, //是否显示关闭按钮
@@ -83,7 +85,7 @@ export default {
         });
         return;
       }
-      //TODO:登录接口
+      //登录接口
       let url = "user/login";
       this.$axios
         .post(url, this.user)
@@ -119,7 +121,7 @@ export default {
             "Bearer " + JSON.parse(sessionStorage.getItem("token")),
         },
         params: {
-          username: this.user.username,
+          userID: this.user.username,
         },
       })
         .then((response) => {
@@ -129,7 +131,7 @@ export default {
             "identityCard",
             response.data.data.identityCard
           );
-          sessionStorage.setItem("username", this.user.username);
+          sessionStorage.setItem("userID", this.user.username);
         })
         .catch((e) => {
           console.log(e);

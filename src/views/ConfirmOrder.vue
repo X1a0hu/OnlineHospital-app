@@ -92,12 +92,11 @@ import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
-      usertest: {},
       user: {
         realName: "",
         identityCard: "",
         birthday: "",
-        userID: "",
+        userID: "", //就是手机号码
       },
       hospital: {
         hpID: this.hpID,
@@ -174,7 +173,7 @@ export default {
         });
     },
     getUserInfo() {
-      this.user.userID = sessionStorage.getItem("userId");
+      this.user.userID = sessionStorage.getItem("userID");
       this.user.realName = sessionStorage.getItem("realName");
       this.user.birthday = sessionStorage.getItem("birthday");
       this.user.identityCard = sessionStorage.getItem("identityCard");
