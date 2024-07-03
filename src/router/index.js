@@ -87,6 +87,11 @@ const routes = [
     name: "report",
     component: () => import("@/views/Report.vue"),
   },
+  {
+    path: "/userInfo",
+    name: "userInfo",
+    component: () => import("@/views/UserInfo.vue"),
+  },
 ];
 //创建路由对象，需要将上面配置的路由信息(数组)
 const router = new VueRouter({

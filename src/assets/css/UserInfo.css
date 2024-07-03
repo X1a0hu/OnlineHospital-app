@@ -1,0 +1,73 @@
+.profile-page {
+  font-family: Arial, sans-serif;
+}
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+.back-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.title {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+}
+.profile-info {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(to right, #5ddcff, #3e73ff);
+  color: white;
+}
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.user-details {
+  margin-left: 10px;
+}
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}
+.phone {
+  font-size: 14px;
+}
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+.menu li i {
+  margin-right: 10px;
+}
+.menu li .arrow {
+  margin-left: auto;
+}
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid #e0e0e0;
+}
+.bottom-nav button {
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}

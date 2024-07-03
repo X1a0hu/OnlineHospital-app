@@ -27,8 +27,13 @@
 export default {
   data() {
     return {
+      test: sessionStorage.getItem("userID"),
+      isLogin: this.test != null ? true : false,
       //组件界面定义变量
     };
+  },
+  created() {
+    this.isLogin = this.test != null ? true : false;
   },
   methods: {
     //组件界面使用所有的方法
@@ -37,7 +42,15 @@ export default {
       this.$router.push({ path: "/" }).catch((e) => {});
     },
     toUserInfo() {
-      this.$router.push({ path: "/login" }).catch((e) => {});
+      if (this.isLogin) {
+        console.log("我要去个人信息界面！");
+        console.log(this.test);
+        this.$router.push({ path: "/userInfo" }).catch((e) => {});
+      } else {
+        console.log(this.test);
+        console.log("我要去登录界面！");
+        this.$router.push({ path: "/login" }).catch((e) => {});
+      }
     },
     toShop() {
       this.$router.push({ path: "/shop" }).catch((e) => {});

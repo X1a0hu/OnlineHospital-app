@@ -153,8 +153,9 @@ import Footer from "@/components/Footer.vue";
 export default {
   data() {
     return {
+      test: sessionStorage.getItem("userID"),
+      isLogin: this.test != null ? true : false,
       //组件界面定义变量
-      isLogin: this.$getSessionStorage("token") != null ? true : false,
       //推荐医生的数组
       doctorList: [
         {
@@ -234,7 +235,11 @@ export default {
     //注册子组件 使用名字：导入名字
     f: Footer,
   },
+  created() {
+    console.log(this.isLogin);
+  },
   mounted() {
+    this.isLogin = this.test != null ? true : false;
     //Dom加载完毕执行
     this.$nextTick(() => {
       //健康评估动态效果

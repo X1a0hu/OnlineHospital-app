@@ -183,9 +183,42 @@ export default {
       this.user.identityCard = this.user.identityCard.replace(/^\"|\"$/g, "");
     },
     pay() {
-      this.$router.push({ path: "/pay" }).catch((e) => {
-        console.log(e);
-      });
+      let url = "/user/submitReserve";
+      this.$axios({
+        method: "post",
+        url: url,
+        headers: {
+          Authorization:
+            "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+        },
+        params: {
+          orderDate: this.selectDay,
+          userID: this.user.userID,
+          hpID: this.hpID,
+          smID: this.smID,
+          state: "1",
+        },
+      })
+        .then((respnose) => {
+          if (respnose.data.code == 200) {
+            this.$message({
+              showClose: false, //是否显示关闭按钮
+              message: "订单已提交！",
+              duration: 1000,
+              type: "success", //类型
+            });
+          }
+        })
+        .catch((e) => {
+          console.log(this.selectDay);
+          console.log(this.user.userID);
+          console.log(this.hpID);
+          console.log(this.smID);
+          console.log(e);
+        });
+      // this.$router.push({ path: "/pay" }).catch((e) => {
+      //   console.log(e);
+      // });
     },
   },
   components: {
