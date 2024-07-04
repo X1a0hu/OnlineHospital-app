@@ -104,6 +104,15 @@ export default {
           });
         })
         .catch((e) => {
+          this.$message({
+            showClose: false, //是否显示关闭按钮
+            message: "登录操作失败",
+            duration: 1000,
+            type: "error", //类型
+            onClose: () => {
+              console.log("关闭");
+            },
+          });
           console.log("出现错误了！");
           console.log(e);
         });

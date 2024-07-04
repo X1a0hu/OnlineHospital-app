@@ -1,27 +1,36 @@
-.Wrapper {
+.container {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
 .health-check-report {
   background-color: #ffffff;
   display: flex;
   flex: 1;
   padding: 10px;
+  height: 100%;
 }
+
 .sidebar {
-  background-color: #f0f0f0; /* 浅灰色背景 */
+  background-color: #f0f0f0;
+  /* 浅灰色背景 */
   padding: 20px;
   border-radius: 4px;
 }
+
 .el-col {
-  padding: 0 10px; /* 确保列之间有间距 */
+  padding: 0 10px;
+  /* 确保列之间有间距 */
 }
+
 @media (max-width: 768px) {
   .sidebar {
     flex: 1;
-    margin-bottom: 20px; /* 在小屏幕上增加下方的空白 */
+    margin-bottom: 20px;
+    /* 在小屏幕上增加下方的空白 */
   }
+
   .health-check-report {
     flex-direction: column;
   }

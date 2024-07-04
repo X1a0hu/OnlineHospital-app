@@ -16,15 +16,15 @@
     </div>
 
     <ul class="menu">
-      <li
-        v-for="item in menuItems"
-        :key="item.label"
-        @click="item.label === '退出登录' ? logout() : navigateTo(item.route)"
-      >
-        <i :class="item.icon"></i>
-        <span class="menu-label">{{ item.label }} </span>
-      </li>
+      <li><span>我的服务</span></li>
+      <li><span>我的预约</span></li>
+      <li><span>我的医生</span></li>
+      <li><span>问诊订单</span></li>
+      <li><span>商城订单</span></li>
+      <li><span @click="toUpdatePWD()">修改密码</span></li>
+      <li><span @click="logout()">退出登录</span></li>
     </ul>
+
     <Footer></Footer>
   </div>
 </template>
@@ -37,21 +37,13 @@ export default {
         userID: "",
         realName: "",
       },
-      menuItems: [
-        { label: "我的预约", icon: "icon-appointment", route: "/" },
-        { label: "我的服务", icon: "icon-service", route: "/" },
-        { label: "我的医生", icon: "icon-doctor", route: "/" },
-        {
-          label: "问诊订单",
-          icon: "icon-consultation-order",
-          route: "/",
-        },
-        { label: "商城订单", icon: "icon-store-order", route: "/" },
-        { label: "退出登录", icon: "icon-logout", route: "/" },
-      ],
     };
   },
   methods: {
+    //TODO:修改密码
+    toUpdatePWD() {
+      this.$router.push({ path: "/updatepwd" });
+    },
     toBack() {
       this.$router.back();
     },
